@@ -1,0 +1,10 @@
+{
+  "lambda": {
+    "role": "serverless-express-executor",
+    "name": "serverless-express",
+    "region": "us-west-2"
+  },
+  "api": {
+    "id": "bj4fcmpp39"
+  }
+}

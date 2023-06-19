@@ -1,0 +1,30 @@
+{
+  "name": "serverless-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon local.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy-dev": "npm run set-env-dev & claudia update --version dev --region us-west-2 --api-module api",
+    "deploy-prod": "npm run set-env-prod & claudia update --version production --region us-west-2 --api-module api",
+    "init-claudia": "claudia generate-serverless-express-proxy --express-module server",
+    "create-api": "claudia create --handler lambda.handler --deploy-proxy-api --region us-west-2",
+    "set-env-dev": "claudia set-version --version dev --set-env-from-json dev.json",
+    "set-env-prod": "claudia set-version --version production --set-env-from-json prod.json",
+    "opt-out": "aws lambda update-function-configuration --function-name serverless-express --description \"aws:states:opt-out\" --profile claudia --region us-west-2",
+    "function-state": "aws lambda get-function --function-name serverless-express --profile claudia --region us-west-2 --query 'Configuration.[State, LastUpdateStatus]'",
+    "function-config": "aws lambda get-function-configuration --function-name serverless-express --profile claudia --region us-west-2"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-serverless-express": "^3.4.0",
+    "body-parser": "^1.20.2",
+    "claudia": "^5.14.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.0",
+    "express": "^4.18.2",
+    "mongodb": "^5.6.0"
+  }
+}
